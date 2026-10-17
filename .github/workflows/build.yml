@@ -1,4 +1,4 @@
-name: Crear Reparador de USB
+name: Crear Para.Usbs.Rotas
 
 on:
   push:
@@ -18,14 +18,16 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Instalar PyInstaller
-      run: pip install pyinstaller
+    - name: Instalar Dependencias Directas
+      run: |
+        python -m pip install --upgrade pip
+        pip install customtkinter pyinstaller
 
     - name: Crear el Ejecutable
-      run: pyinstaller --onefile --console --name "Para.Usbs.Rotas" reparar_usb.py
+      run: pyinstaller --onefile --windowed --collect-all customtkinter --name "Para.Usbs.Rotas" reparar_usb_pro.py
 
     - name: Subir el Ejecutable
       uses: actions/upload-artifact@v4
       with:
-        name: Para.Usbs.Rotas
+        name: Para_Usbs_Rotas
         path: dist/*.exe
